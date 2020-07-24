@@ -1,7 +1,6 @@
 package com.oocl.cultivation.story1;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PackingBoy {
 
@@ -17,7 +16,7 @@ public class PackingBoy {
     }
 
     public PackingBoy(List<PackingLot> parkingLotList) {
-        this.packingLots = parkingLotList.stream().collect(Collectors.toList());
+        this.packingLots = new ArrayList<>(parkingLotList);
     }
 
     public String parkCar(Car car) {
@@ -53,8 +52,6 @@ public class PackingBoy {
             return null;
         }
 
-        List<String> ticketList = new ArrayList<>();
-
         for (Car car : carList) {
             if (isCarHaveBenParked(car)) {
                 errorMessage = "the car has benn packed";
@@ -62,6 +59,7 @@ public class PackingBoy {
             }
         }
 
+        List<String> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {
             for (PackingLot packingLot : packingLots) {

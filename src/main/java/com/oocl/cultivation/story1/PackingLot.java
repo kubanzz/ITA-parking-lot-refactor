@@ -28,8 +28,4 @@ public class PackingLot {
     List<Car> getPackingCarList() {
         return packingCarList;
     }
-
-    public void setPackingCarList(List<Car> packingCarList) {
-        this.packingCarList = packingCarList;
-    }
 }
