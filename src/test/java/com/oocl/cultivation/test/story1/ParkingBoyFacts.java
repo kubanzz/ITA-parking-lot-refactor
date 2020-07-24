@@ -2,6 +2,7 @@ package com.oocl.cultivation.test.story1;
 
 import com.oocl.cultivation.story1.Car;
 import com.oocl.cultivation.story1.PackingBoy;
+import com.oocl.cultivation.story1.PackingLot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,8 +41,8 @@ class ParkingBoyFacts {
     @Test
     void should_return_full_message_when_park_car_given_car_parkingboy_parkingspace_0(){
         //given
-        int parkingSpace = 0;
-        PackingBoy packingBoy = new PackingBoy(parkingSpace);
+        PackingLot packingLot = new PackingLot(0);
+        PackingBoy packingBoy = new PackingBoy(packingLot);
         Car car = new Car("1234");
 
         //when
