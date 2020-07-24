@@ -63,7 +63,7 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        Car fetchCar = packingBoy.fetchCar(packingBoy, carList, ticket);
+        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
 
         //then
         Assertions.assertEquals(ticket, fetchCar.getCardId());
