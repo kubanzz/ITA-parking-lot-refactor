@@ -48,7 +48,7 @@ class ParkingBoyFacts {
         String result = packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the parking is full",result);
+        Assertions.assertEquals("Not enough position.",result);
     }
 
     @Test

@@ -33,7 +33,7 @@ public class PackingBoy {
 
             return car.getCardId();
         }
-        return "the parking is full";
+        return "Not enough position.";
     }
 
     public List<String> parkCar(List<Car> carList) {
