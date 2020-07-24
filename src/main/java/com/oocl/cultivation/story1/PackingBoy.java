@@ -48,7 +48,7 @@ public class PackingBoy {
 
     public Car fetchCar(String ticket) {
         if (ticket == null) {
-            errorMessage = "Unrecognized parking ticket.";
+            errorMessage = "Please provide your parking ticket.";
             return null;
         }
 
