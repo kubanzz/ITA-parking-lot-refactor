@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PackingBoy {
+
+    private int parkingSpace;
     public PackingBoy() {
+    }
+
+    public PackingBoy(int parkingSpace) {
+        this.parkingSpace = parkingSpace;
     }
 
     public String parkCar(Car car) {

@@ -23,7 +23,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_2_ticket_when_fetch_given_car_parkingboy(){
+    void should_return_2_ticket_when_park_given_car_parkingboy(){
         //given
         PackingBoy packingBoy = new PackingBoy();
         List<Car> carList = new ArrayList<>();
@@ -35,6 +35,20 @@ class ParkingBoyFacts {
 
         //then
         Assertions.assertEquals(2, ticketList.size());
+    }
+
+    @Test
+    void should_return_full_message_when_park_car_given_car_parkingboy_parkingspace_0(){
+        //given
+        int parkingSpace = 0;
+        PackingBoy packingBoy = new PackingBoy(parkingSpace);
+        Car car = new Car();
+
+        //when
+        String result = packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the parking is full",result);
     }
 
 }
