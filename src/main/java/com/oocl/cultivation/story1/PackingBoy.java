@@ -1,5 +1,6 @@
 package com.oocl.cultivation.story1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PackingBoy {
@@ -11,6 +12,11 @@ public class PackingBoy {
     }
 
     public List<String> parkCar(List<Car> carList) {
-        return null;
+        List<String> ticketList = new ArrayList<>();
+
+        for (int i = 0; i < carList.size(); i++) {
+            ticketList.add(i + "");
+        }
+        return ticketList;
     }
 }
