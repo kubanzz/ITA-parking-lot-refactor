@@ -20,6 +20,10 @@ public class PackingBoy {
 
     public String parkCar(Car car) {
         if (this.parkingSpace > 0) {
+
+            if (packingCarList.contains(car)) {
+                return "the car has benn packed";
+            }
             packingCarList.add(car);
             this.parkingSpace --;
 
