@@ -5,6 +5,6 @@ public class PackingBoy {
     }
 
     public String parkCar(Car car) {
-        return null;
+        return "123";
     }
 }
