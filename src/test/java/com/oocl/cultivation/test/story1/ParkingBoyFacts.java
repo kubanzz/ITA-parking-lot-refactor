@@ -45,10 +45,10 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        String result = packingBoy.parkCar(car);
+        packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",result);
+        Assertions.assertEquals("Not enough position.",packingBoy.getErrorMessage());
     }
 
     @Test
@@ -59,10 +59,10 @@ class ParkingBoyFacts {
 
         //when
         packingBoy.parkCar(car);
-        String result = packingBoy.parkCar(car);
+        packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car has benn packed",result);
+        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
     }
 
     @Test
@@ -72,10 +72,10 @@ class ParkingBoyFacts {
         Car car = null;
 
         //when
-        String result = packingBoy.parkCar(car);
+        packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car cannot be null",result);
+        Assertions.assertEquals("the car cannot be null",packingBoy.getErrorMessage());
     }
 
     @Test

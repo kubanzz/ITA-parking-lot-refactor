@@ -20,28 +20,41 @@ public class PackingBoy {
     }
     public String parkCar(Car car) {
         if (car == null) {
-            return "the car cannot be null";
+            errorMessage = "the car cannot be null";
+            return null;
         }
 
         if (this.parkingSpace > 0) {
 
             if (packingCarList.contains(car)) {
-                return "the car has benn packed";
+                errorMessage = "the car has benn packed";
+                return null;
             }
             packingCarList.add(car);
             this.parkingSpace --;
 
             return car.getCardId();
         }
-        return "Not enough position.";
+        errorMessage = "Not enough position.";
+        return null;
     }
 
     public List<String> parkCar(List<Car> carList) {
+        if (carList == null) {
+            errorMessage = "the car cannot be null";
+            return null;
+        }
+
         List<String> ticketList = new ArrayList<>();
 
         for (Car car : carList) {
-            packingCarList.add(car);
-            ticketList.add(car.getCardId());
+            if (this.parkingSpace > 0){
+                packingCarList.add(car);
+                ticketList.add(car.getCardId());
+            }else {
+                errorMessage = "Not enough position.";
+                break;
+            }
         }
         return ticketList;
     }
