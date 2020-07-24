@@ -69,4 +69,22 @@ class ParkingBoyFacts {
         Assertions.assertEquals(ticket, fetchCar.getCardId());
     }
 
+    @Test
+    void should_return_null_when_fetch_car_given_2car_parkingboy_wrong_ticket() {
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        String ticket = "1235";
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        packingBoy.parkCar(carList);
+
+        //when
+        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
+
+        //then
+        Assertions.assertNull(fetchCar);
+    }
+
 }
