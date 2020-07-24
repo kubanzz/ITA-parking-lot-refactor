@@ -90,7 +90,7 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
+        Car fetchCar = packingBoy.fetchCar(ticket);
 
         //then
         Assertions.assertEquals(ticket, fetchCar.getCardId());
@@ -108,10 +108,28 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
+        Car fetchCar = packingBoy.fetchCar(ticket);
 
         //then
         Assertions.assertNull(fetchCar);
+    }
+
+    @Test
+    void should_return_wrong_message_when_fetch_car_given_2car_parkingboy_without_ticket() {
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        String ticket = null;
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        packingBoy.parkCar(carList);
+
+        //when
+        packingBoy.fetchCar(ticket);
+
+        //then
+        Assertions.assertEquals("Unrecognized parking ticket.",packingBoy.getErrorMessage());
     }
 
     @Test
@@ -126,8 +144,8 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        packingBoy.fetchCar(packingBoy, ticket);
-        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
+        packingBoy.fetchCar(ticket);
+        Car fetchCar = packingBoy.fetchCar(ticket);
 
         //then
         Assertions.assertNull(fetchCar);

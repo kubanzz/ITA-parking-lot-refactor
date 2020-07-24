@@ -17,7 +17,6 @@ public class PackingBoy {
         this.parkingSpace = parkingSpace;
         packingCarList = new ArrayList<>();
     }
-
     public String parkCar(Car car) {
         if (car == null) {
             return "the car cannot be null";
@@ -46,13 +45,17 @@ public class PackingBoy {
         return ticketList;
     }
 
-    public Car fetchCar(PackingBoy packingBoy, String ticket) {
+    public Car fetchCar(String ticket) {
         for (Car car : packingCarList) {
             if (car.getCardId().equals(ticket)) {
                 packingCarList.remove(car);
                 return car;
             }
         }
+        return null;
+    }
+
+    public String getErrorMessage() {
         return null;
     }
 }
