@@ -151,4 +151,23 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Unrecognized parking ticket.",packingBoy.getErrorMessage());
     }
+
+    @Test
+    void should_return_true_when_park_car_given_fullParkingLot_unFullParkingLot_pakingboy_car() {
+        //given
+        List<PackingLot> packingLotList = new ArrayList<>();
+        PackingLot fullPackingLot = new PackingLot(1);
+        PackingLot unFullPackingLot = new PackingLot(2);
+        packingLotList.add(fullPackingLot);
+        packingLotList.add(unFullPackingLot);
+
+        PackingBoy packingBoy = new PackingBoy(packingLotList);
+        Car car = new Car("1234");
+
+        //when
+        String ticket = packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals(car.getCardId(),ticket);
+    }
 }
