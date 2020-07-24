@@ -52,6 +52,20 @@ class ParkingBoyFacts {
     }
 
     @Test
+    void should_return_wrong_message_when_park_car_given_parked_car_and_parkingboy(){
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        Car car = new Car("1234");
+
+        //when
+        packingBoy.parkCar(car);
+        String result = packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the car has benn packed",result);
+    }
+
+    @Test
     void should_return_current_ticket_when_fetch_car_given_2car_parkingboy_ticket() {
         //given
         PackingBoy packingBoy = new PackingBoy();
