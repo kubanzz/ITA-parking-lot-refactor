@@ -19,6 +19,10 @@ public class PackingBoy {
     }
 
     public String parkCar(Car car) {
+        if (car == null) {
+            return "the car cannot be null";
+        }
+
         if (this.parkingSpace > 0) {
 
             if (packingCarList.contains(car)) {
