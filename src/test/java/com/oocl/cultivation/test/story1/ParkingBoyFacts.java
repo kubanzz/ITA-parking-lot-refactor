@@ -5,9 +5,12 @@ import com.oocl.cultivation.story1.PackingBoy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class ParkingBoyFacts {
     @Test
-    void should_return_ticket_when_give_car_pakingboy() {
+    void should_return_ticket_when_park_given_car_pakingboy() {
         //given
         PackingBoy packingBoy = new PackingBoy();
         Car car = new Car();
@@ -19,6 +22,19 @@ class ParkingBoyFacts {
         Assertions.assertNotNull(ticket);
     }
 
+    @Test
+    void should_return_2_ticket_when_fetch_given_car_parkingboy(){
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car());
+        carList.add(new Car());
 
+        //when
+        List<String> ticketList = packingBoy.parkCar(carList);
+
+        //then
+        Assertions.assertEquals(2, ticketList.size());
+    }
 
 }
