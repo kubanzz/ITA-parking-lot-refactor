@@ -17,7 +17,7 @@ public class PackingBoy {
 
     public String parkCar(Car car) {
         if (this.parkingSpace > 0) {
-            return "123";
+            return car.getCardId();
         }
         return "the parking is full";
     }
@@ -25,9 +25,13 @@ public class PackingBoy {
     public List<String> parkCar(List<Car> carList) {
         List<String> ticketList = new ArrayList<>();
 
-        for (int i = 0; i < carList.size(); i++) {
-            ticketList.add(i + "");
+        for (Car car : carList) {
+            ticketList.add(car.getCardId());
         }
         return ticketList;
+    }
+
+    public Car fetchCar(PackingBoy packingBoy, List<Car> carList, String ticket) {
+        return null;
     }
 }

@@ -13,7 +13,7 @@ class ParkingBoyFacts {
     void should_return_ticket_when_park_given_car_pakingboy() {
         //given
         PackingBoy packingBoy = new PackingBoy();
-        Car car = new Car();
+        Car car = new Car("1234");
 
         //when
         String ticket = packingBoy.parkCar(car);
@@ -27,8 +27,8 @@ class ParkingBoyFacts {
         //given
         PackingBoy packingBoy = new PackingBoy();
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car());
-        carList.add(new Car());
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
 
         //when
         List<String> ticketList = packingBoy.parkCar(carList);
@@ -42,13 +42,31 @@ class ParkingBoyFacts {
         //given
         int parkingSpace = 0;
         PackingBoy packingBoy = new PackingBoy(parkingSpace);
-        Car car = new Car();
+        Car car = new Car("1234");
 
         //when
         String result = packingBoy.parkCar(car);
 
         //then
         Assertions.assertEquals("the parking is full",result);
+    }
+
+    @Test
+    void should_return_current_ticket_when_fetch_car_given_2car_parkingboy_ticket() {
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        String ticket = "1234";
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        packingBoy.parkCar(carList);
+
+        //when
+        Car fetchCar = packingBoy.fetchCar(packingBoy, carList, ticket);
+
+        //then
+        Assertions.assertEquals(ticket, fetchCar.getCardId());
     }
 
 }
