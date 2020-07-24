@@ -145,9 +145,9 @@ class ParkingBoyFacts {
 
         //when
         packingBoy.fetchCar(ticket);
-        Car fetchCar = packingBoy.fetchCar(ticket);
+        packingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertNull(fetchCar);
+        Assertions.assertEquals("Unrecognized parking ticket.",packingBoy.getErrorMessage());
     }
 }

@@ -58,6 +58,7 @@ public class PackingBoy {
                 return car;
             }
         }
+        errorMessage = "Unrecognized parking ticket.";
         return null;
     }
 
