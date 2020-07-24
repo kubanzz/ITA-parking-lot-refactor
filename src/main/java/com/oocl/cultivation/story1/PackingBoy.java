@@ -39,9 +39,9 @@ public class PackingBoy {
     }
 
     public Car fetchCar(PackingBoy packingBoy, String ticket) {
-
         for (Car car : packingCarList) {
             if (car.getCardId().equals(ticket)) {
+                packingCarList.remove(car);
                 return car;
             }
         }
