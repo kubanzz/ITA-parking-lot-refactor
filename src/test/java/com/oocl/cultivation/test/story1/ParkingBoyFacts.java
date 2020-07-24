@@ -87,4 +87,22 @@ class ParkingBoyFacts {
         Assertions.assertNull(fetchCar);
     }
 
+    @Test
+    void should_return_null_when_fetch_car_given_2car_pakingboy_ticket_has_benn_used() {
+        //given
+        PackingBoy packingBoy = new PackingBoy();
+        String ticket = "1234";
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        packingBoy.parkCar(carList);
+
+        //when
+        packingBoy.fetchCar(packingBoy, ticket);
+        Car fetchCar = packingBoy.fetchCar(packingBoy, ticket);
+
+        //then
+        Assertions.assertNull(fetchCar);
+    }
 }
