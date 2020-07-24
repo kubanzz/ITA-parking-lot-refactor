@@ -7,6 +7,7 @@ public class PackingBoy {
 
     private int parkingSpace;
     private List<Car> packingCarList;
+    private String errorMessage;
 
     public PackingBoy() {
         parkingSpace = 10;
@@ -46,6 +47,11 @@ public class PackingBoy {
     }
 
     public Car fetchCar(String ticket) {
+        if (ticket == null) {
+            errorMessage = "Unrecognized parking ticket.";
+            return null;
+        }
+
         for (Car car : packingCarList) {
             if (car.getCardId().equals(ticket)) {
                 packingCarList.remove(car);
@@ -56,6 +62,6 @@ public class PackingBoy {
     }
 
     public String getErrorMessage() {
-        return null;
+        return errorMessage;
     }
 }
