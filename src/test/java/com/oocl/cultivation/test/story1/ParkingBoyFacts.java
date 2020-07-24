@@ -19,7 +19,7 @@ class ParkingBoyFacts {
         String ticket = packingBoy.parkCar(car);
 
         //then
-        Assertions.assertNotNull(ticket);
+        Assertions.assertNotEquals("the parking is full",ticket);
     }
 
     @Test

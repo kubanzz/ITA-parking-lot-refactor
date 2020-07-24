@@ -6,7 +6,9 @@ import java.util.List;
 public class PackingBoy {
 
     private int parkingSpace;
+
     public PackingBoy() {
+        parkingSpace = 10;
     }
 
     public PackingBoy(int parkingSpace) {
@@ -14,7 +16,10 @@ public class PackingBoy {
     }
 
     public String parkCar(Car car) {
-        return "123";
+        if (this.parkingSpace > 0) {
+            return "123";
+        }
+        return "the parking is full";
     }
 
     public List<String> parkCar(List<Car> carList) {
