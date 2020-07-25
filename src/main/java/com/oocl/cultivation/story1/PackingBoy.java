@@ -86,7 +86,7 @@ public class PackingBoy {
         return ticketList;
     }
 
-    private boolean isCarHaveBenParked(Car car){
+    boolean isCarHaveBenParked(Car car){
         for (PackingLot packingLot : packingLots) {
             List<Car> carList = packingLot.getPackingCarList();
             for (Car carParked : carList) {

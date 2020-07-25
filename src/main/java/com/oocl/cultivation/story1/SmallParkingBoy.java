@@ -18,6 +18,12 @@ public class SmallParkingBoy extends PackingBoy{
 
     @Override
     public String parkCar(Car car) {
+
+        if (isCarHaveBenParked(car)) {
+            setErrorMessage("the car has benn packed");
+            return null;
+        }
+
         PackingLot packingLot = findSurplusMaxSpaceParkingLot();
         if (packingLot != null && packingLot.getParkingSpace() > 0) {
             packingLot.getPackingCarList().add(car);
