@@ -343,4 +343,24 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Please provide your parking ticket.",smallParkingBoy.getErrorMessage());
     }
+
+    @Test
+    void should_return_null_when_fetch_car_given_2car_smallParkingBoy_ticket_has_benn_used() {
+        //given
+        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        String ticket = "1234";
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        smallParkingBoy.parkCar(carList);
+
+        //when
+        smallParkingBoy.fetchCar(ticket);
+        smallParkingBoy.fetchCar(ticket);
+
+        //then
+        Assertions.assertEquals("Unrecognized parking ticket.",smallParkingBoy.getErrorMessage());
+    }
+
 }
