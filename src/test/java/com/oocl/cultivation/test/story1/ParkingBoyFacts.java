@@ -290,4 +290,22 @@ class ParkingBoyFacts {
         Assertions.assertEquals("the car cannot be null",smallPackingBoy.getErrorMessage());
     }
 
+    @Test
+    void should_return_current_ticket_when_fetch_car_given_2car_smallParkingBoy_ticket() {
+        //given
+        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        String ticket = "1234";
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        smallParkingBoy.parkCar(carList);
+
+        //when
+        Car fetchCar = smallParkingBoy.fetchCar(ticket);
+
+        //then
+        Assertions.assertEquals(ticket, fetchCar.getCardId());
+    }
+
 }
