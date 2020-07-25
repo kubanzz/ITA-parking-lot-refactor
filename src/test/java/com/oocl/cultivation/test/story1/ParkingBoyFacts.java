@@ -249,4 +249,17 @@ class ParkingBoyFacts {
         Assertions.assertEquals(2, ticketList.size());
     }
 
+    @Test
+    void should_return_full_message_when_park_car_given_car_smallParkingBoy_parkingSpace_0(){
+        //given
+        PackingLot packingLot = new PackingLot(0);
+        PackingBoy packingBoy = new SmallParkingBoy(packingLot);
+        Car car = new Car("1234");
+
+        //when
+        packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("Not enough position.",packingBoy.getErrorMessage());
+    }
 }

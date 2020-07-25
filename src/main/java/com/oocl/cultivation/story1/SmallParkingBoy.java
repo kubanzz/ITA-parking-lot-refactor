@@ -8,6 +8,10 @@ public class SmallParkingBoy extends PackingBoy{
         super();
     }
 
+    public SmallParkingBoy(PackingLot packingLot) {
+        super(packingLot);
+    }
+
     public SmallParkingBoy(List<PackingLot> packingLotList) {
         super(packingLotList);
     }
