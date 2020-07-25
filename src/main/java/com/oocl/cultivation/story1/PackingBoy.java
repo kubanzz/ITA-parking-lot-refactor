@@ -21,6 +21,14 @@ public class PackingBoy {
         this.packingLots = new ArrayList<>(parkingLotList);
     }
 
+    public List<PackingLot> getPackingLotList() {
+        return this.packingLots;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
@@ -44,7 +52,7 @@ public class PackingBoy {
                 packingCarList.add(car);
                 packingLot.setParkingSpace(-- parkingSpace);
 
-                return car.getCardId();
+                return generateTicket(car);
             }
         }
 
@@ -96,7 +104,7 @@ public class PackingBoy {
             List<Car> carList = packingLot.getPackingCarList();
             int packingSpace = packingLot.getParkingSpace();
             for (Car carParked : carList) {
-                if (carParked.getCardId().equals(ticket)) {
+                if (generateTicket(carParked).equals(ticket)) {
                     carList.remove(carParked);
                     packingLot.setParkingSpace(-- packingSpace);
                     return carParked;
@@ -108,11 +116,7 @@ public class PackingBoy {
         return null;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public List<PackingLot> getPackingLotList() {
-        return this.packingLots;
+    protected String generateTicket(Car car){
+        return car.getCardId();
     }
 }

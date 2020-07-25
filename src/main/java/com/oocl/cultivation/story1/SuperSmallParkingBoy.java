@@ -36,7 +36,7 @@ public class SuperSmallParkingBoy extends PackingBoy {
         if (packingLot != null && packingLot.getParkingSpace() > 0) {
             packingLot.getPackingCarList().add(car);
             packingLot.setParkingSpace(packingLot.getParkingSpace() - 1);
-            return car.getCardId();
+            return generateTicket(car);
         }
         setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
         return null;
