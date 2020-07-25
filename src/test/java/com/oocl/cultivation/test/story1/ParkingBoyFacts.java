@@ -209,12 +209,12 @@ class ParkingBoyFacts {
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy packingBoy = new SmallParkingBoy(packingLotList);
+        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
         Car car = new Car("1234");
 
         //when
-        packingBoy.parkCar(car);
-        List<PackingLot> packingLotListInPackingBoy = packingBoy.getPackingLotList();
+        smallPackingBoy.parkCar(car);
+        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
         boolean isFind = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car);
 
         //then
@@ -224,11 +224,11 @@ class ParkingBoyFacts {
     @Test
     void should_return_ticket_when_park_given_car_smallPakingboy() {
         //given
-        PackingBoy packingBoy = new SmallParkingBoy();
+        PackingBoy smallPackingBoy = new SmallParkingBoy();
         Car car = new Car("1234");
 
         //when
-        String ticket = packingBoy.parkCar(car);
+        String ticket = smallPackingBoy.parkCar(car);
 
         //then
         Assertions.assertEquals(car.getCardId(),ticket);
@@ -253,13 +253,13 @@ class ParkingBoyFacts {
     void should_return_full_message_when_park_car_given_car_smallParkingBoy_parkingSpace_0(){
         //given
         PackingLot packingLot = new PackingLot(0);
-        PackingBoy packingBoy = new SmallParkingBoy(packingLot);
+        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLot);
         Car car = new Car("1234");
 
         //when
-        packingBoy.parkCar(car);
+        smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",packingBoy.getErrorMessage());
+        Assertions.assertEquals("Not enough position.",smallPackingBoy.getErrorMessage());
     }
 }

@@ -19,8 +19,12 @@ public class SmallParkingBoy extends PackingBoy{
     @Override
     public String parkCar(Car car) {
         PackingLot packingLot = findSurplusMaxSpaceParkingLot();
-        packingLot.getPackingCarList().add(car);
-        return car.getCardId();
+        if (packingLot != null && packingLot.getParkingSpace() > 0) {
+            packingLot.getPackingCarList().add(car);
+            return car.getCardId();
+        }
+        setErrorMessage("Not enough position.");
+        return null;
     }
 
     private PackingLot findSurplusMaxSpaceParkingLot() {

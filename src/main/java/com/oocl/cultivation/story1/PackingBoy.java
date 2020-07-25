@@ -19,6 +19,10 @@ public class PackingBoy {
         this.packingLots = new ArrayList<>(parkingLotList);
     }
 
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     public String parkCar(Car car) {
         if (car == null) {
             errorMessage = "the car cannot be null";
