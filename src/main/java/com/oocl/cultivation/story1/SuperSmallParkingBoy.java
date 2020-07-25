@@ -19,6 +19,16 @@ public class SuperSmallParkingBoy extends PackingBoy {
 
     @Override
     public String parkCar(Car car) {
+        if (car == null) {
+            setErrorMessage("the car cannot be null");
+            return null;
+        }
+
+        if (isCarHaveBenParked(car)) {
+            setErrorMessage("the car has benn packed");
+            return null;
+        }
+
         PackingLot packingLot = findMaxSiteRateParkingLot();
         if (packingLot != null && packingLot.getParkingSpace() > 0) {
             packingLot.getPackingCarList().add(car);
