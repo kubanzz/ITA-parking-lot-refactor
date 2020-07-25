@@ -345,7 +345,7 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_2car_smallParkingBoy_ticket_has_benn_used() {
+    void should_return_unrecognized_message_when_fetch_car_given_2car_smallParkingBoy_ticket_has_benn_used() {
         //given
         PackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = "1234";
@@ -363,4 +363,23 @@ class ParkingBoyFacts {
         Assertions.assertEquals("Unrecognized parking ticket.",smallParkingBoy.getErrorMessage());
     }
 
+    @Test
+    void should_return_true_when_park_car_given_fullParkingLot_unFullParkingLot_smallParkingBoy_car() {
+        //given
+        List<PackingLot> packingLotList = new ArrayList<>();
+        PackingLot fullPackingLot = new PackingLot(1);
+        PackingLot unFullPackingLot = new PackingLot(2);
+        packingLotList.add(fullPackingLot);
+        packingLotList.add(unFullPackingLot);
+
+        PackingBoy smallParkingBoy = new SmallParkingBoy(packingLotList);
+        Car car = new Car("1234");
+
+        //when
+        smallParkingBoy.parkCar(new Car("2345"));
+        String ticket = smallParkingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals(car.getCardId(),ticket);
+    }
 }
