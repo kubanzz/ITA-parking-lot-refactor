@@ -79,9 +79,10 @@ public class PackingBoy {
                     break;
                 }
             }
-            if (parkedCarNums != carList.size()) {
-                errorMessage = "Not enough position.";
-            }
+        }
+
+        if (parkedCarNums != carList.size()) {
+            errorMessage = "Not enough position.";
         }
         return ticketList;
     }

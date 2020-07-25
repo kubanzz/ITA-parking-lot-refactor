@@ -1,5 +1,6 @@
 package com.oocl.cultivation.story1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SmallParkingBoy extends PackingBoy{
@@ -39,7 +40,37 @@ public class SmallParkingBoy extends PackingBoy{
 
     @Override
     public List<String> parkCar(List<Car> carList) {
-        return super.parkCar(carList);
+        if (carList == null) {
+            setErrorMessage("the car cannot be null");
+            return null;
+        }
+
+        for (Car car : carList) {
+            if (isCarHaveBenParked(car)) {
+                setErrorMessage("the car has benn packed");
+                return null;
+            }
+        }
+
+        List<String> ticketList = new ArrayList<>();
+        int parkedCarNums = 0;
+        for (Car car : carList) {
+            PackingLot packingLot = findSurplusMaxSpaceParkingLot();
+            if (packingLot != null && packingLot.getParkingSpace() > 0) {
+                int parkingSpace = packingLot.getParkingSpace();
+                List<Car> packingCarList = packingLot.getPackingCarList();
+
+                packingCarList.add(car);
+                packingLot.setParkingSpace(-- parkingSpace);
+                parkedCarNums ++;
+                ticketList.add(car.getCardId());
+            }
+        }
+
+        if (parkedCarNums != carList.size()) {
+            setErrorMessage("Not enough position.");
+        }
+        return ticketList;
     }
 
     private PackingLot findSurplusMaxSpaceParkingLot() {

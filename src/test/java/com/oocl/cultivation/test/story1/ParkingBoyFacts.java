@@ -427,7 +427,7 @@ class ParkingBoyFacts {
         smallPackingBoy.parkCar(carList);
         List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
         boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
-        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car1);
+        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
 
         //then
         Assertions.assertTrue(isFindCar1InParkingLot1 && isFindCar2InParkingLot2);
