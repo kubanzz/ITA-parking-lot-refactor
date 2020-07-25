@@ -262,4 +262,18 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Not enough position.",smallPackingBoy.getErrorMessage());
     }
+
+    @Test
+    void should_return_wrong_message_when_park_car_given_parked_car_and_smallParkingBoy(){
+        //given
+        PackingBoy packingBoy = new SmallParkingBoy();
+        Car car = new Car("1234");
+
+        //when
+        packingBoy.parkCar(car);
+        packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+    }
 }
