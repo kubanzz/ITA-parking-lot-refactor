@@ -119,4 +119,8 @@ public class PackingBoy {
     public String getErrorMessage() {
         return errorMessage;
     }
+
+    public List<PackingLot> getPackingLotList() {
+        return this.packingLots;
+    }
 }

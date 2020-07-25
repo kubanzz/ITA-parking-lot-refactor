@@ -3,6 +3,7 @@ package com.oocl.cultivation.test.story1;
 import com.oocl.cultivation.story1.Car;
 import com.oocl.cultivation.story1.PackingBoy;
 import com.oocl.cultivation.story1.PackingLot;
+import com.oocl.cultivation.story1.SmallParkingBoy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -196,5 +197,26 @@ class ParkingBoyFacts {
 
         //then
         Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+    }
+
+    @Test
+    void should_return_true_when_parkingCar_and_find_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace10_and_parkingBoy_and_car() {
+        //given
+        List<PackingLot> packingLotList = new ArrayList<>();
+        PackingLot packingLot1 = new PackingLot(5);
+        PackingLot packingLot2 = new PackingLot(10);
+        packingLotList.add(packingLot1);
+        packingLotList.add(packingLot2);
+
+        PackingBoy packingBoy = new SmallParkingBoy(packingLotList);
+        Car car = new Car("1234");
+
+        //when
+        packingBoy.parkCar(car);
+        List<PackingLot> packingLotListInPackingBoy = packingBoy.getPackingLotList();
+        boolean isFind = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car);
+
+        //then
+        Assertions.assertTrue(isFind);
     }
 }

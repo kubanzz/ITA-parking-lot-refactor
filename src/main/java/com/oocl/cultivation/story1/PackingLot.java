@@ -7,7 +7,7 @@ public class PackingLot {
     private int parkingSpace;
     private List<Car> packingCarList;
 
-    PackingLot() {
+    public PackingLot() {
         this.parkingSpace = 10;
         this.packingCarList = new ArrayList<>();
     }
@@ -25,7 +25,7 @@ public class PackingLot {
         this.parkingSpace = parkingSpace;
     }
 
-    List<Car> getPackingCarList() {
+    public List<Car> getPackingCarList() {
         return packingCarList;
     }
 }
