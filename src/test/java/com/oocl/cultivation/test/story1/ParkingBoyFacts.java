@@ -266,14 +266,28 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_park_car_given_parked_car_and_smallParkingBoy(){
         //given
-        PackingBoy packingBoy = new SmallParkingBoy();
+        PackingBoy smallPackingBoy = new SmallParkingBoy();
         Car car = new Car("1234");
 
         //when
-        packingBoy.parkCar(car);
-        packingBoy.parkCar(car);
+        smallPackingBoy.parkCar(car);
+        smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+        Assertions.assertEquals("the car has benn packed",smallPackingBoy.getErrorMessage());
     }
+
+    @Test
+    void should_return_wrong_message_when_park_car_given_null_car_and_smallParkingBoy(){
+        //given
+        PackingBoy smallPackingBoy = new SmallParkingBoy();
+        Car car = null;
+
+        //when
+        smallPackingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the car cannot be null",smallPackingBoy.getErrorMessage());
+    }
+
 }
