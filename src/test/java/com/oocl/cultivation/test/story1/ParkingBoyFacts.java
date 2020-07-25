@@ -577,7 +577,7 @@ class ParkingBoyFacts {
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
+        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
         List<Car> carList = new ArrayList<>();
         Car car1 = new Car("1234");
         Car car2 = new Car("2345");
@@ -585,8 +585,8 @@ class ParkingBoyFacts {
         carList.add(car2);
 
         //when
-        smallPackingBoy.parkCar(carList);
-        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
+        superSmallPackingBoy.parkCar(carList);
+        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
         boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
         boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
 
