@@ -5,6 +5,10 @@ import java.util.List;
 public class SuperSmallParkingBoy extends PackingBoy {
 
 
+    public SuperSmallParkingBoy(PackingLot packingLot) {
+        super(packingLot);
+    }
+
     public SuperSmallParkingBoy(List<PackingLot> packingLotList) {
         super(packingLotList);
     }
@@ -20,9 +24,9 @@ public class SuperSmallParkingBoy extends PackingBoy {
             packingLot.getPackingCarList().add(car);
             return car.getCardId();
         }
-        return super.parkCar(car);
+        return null;
     }
-
+    
     private PackingLot findMaxSiteRateParkingLot() {
         List<PackingLot> packingLotList = getPackingLotList();
         PackingLot maxSiteRateParkingLot = null;
@@ -39,6 +43,9 @@ public class SuperSmallParkingBoy extends PackingBoy {
     }
 
     private double calculateSiteRate(PackingLot parkingLot) {
+        if (parkingLot.getParkingSpace() == 0) {
+            return 0;
+        }
         return parkingLot.getParkingSpace() / (parkingLot.getParkingSpace() + parkingLot.getPackingCarList().size());
     }
 

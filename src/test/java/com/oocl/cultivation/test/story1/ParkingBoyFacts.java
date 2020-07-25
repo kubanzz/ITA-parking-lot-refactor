@@ -487,13 +487,14 @@ class ParkingBoyFacts {
     void should_return_full_message_when_park_car_given_car_superSmallParkingBoy_parkingSpace_0(){
         //given
         PackingLot packingLot = new PackingLot(0);
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLot);
+        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLot);
         Car car = new Car("1234");
 
         //when
-        smallPackingBoy.parkCar(car);
+        superSmallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals("Not enough position.",superSmallPackingBoy.getErrorMessage());
     }
+
 }
