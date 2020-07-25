@@ -382,4 +382,28 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals(car.getCardId(),ticket);
     }
+
+    @Test
+    void should_return_has_been_packed_message_when_park_car_given_unfullParkingLot_after_carParked_unFullParkingLot_smallParkingBoy_and_2Car() {
+        //given
+        List<PackingLot> packingLotList = new ArrayList<>();
+        PackingLot fullPackingLot = new PackingLot(1);
+        PackingLot unFullPackingLot = new PackingLot(2);
+        packingLotList.add(fullPackingLot);
+        packingLotList.add(unFullPackingLot);
+
+        PackingBoy packingBoy = new PackingBoy(packingLotList);
+        Car car1 = new Car("1234");
+        Car car2 = new Car("4567");
+
+        //when
+        String ticket1 = packingBoy.parkCar(car1);
+        packingBoy.parkCar(car2);
+        packingBoy.fetchCar(ticket1);
+        packingBoy.parkCar(car2);
+
+
+        //then
+        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+    }
 }
