@@ -37,6 +37,11 @@ public class SmallParkingBoy extends PackingBoy{
         return null;
     }
 
+    @Override
+    public List<String> parkCar(List<Car> carList) {
+        return super.parkCar(carList);
+    }
+
     private PackingLot findSurplusMaxSpaceParkingLot() {
         List<PackingLot> packingLotList = getPackingLotList();
         PackingLot surplusMaxSpacParkingLot = null;
@@ -49,8 +54,4 @@ public class SmallParkingBoy extends PackingBoy{
         return surplusMaxSpacParkingLot;
     }
 
-    @Override
-    public List<String> parkCar(List<Car> carList) {
-        return super.parkCar(carList);
-    }
 }
