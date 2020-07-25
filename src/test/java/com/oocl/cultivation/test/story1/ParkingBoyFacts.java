@@ -467,4 +467,19 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals(car.getCardId(),ticket);
     }
+
+    @Test
+    void should_return_2_ticket_when_park_given_car_superSmallParkingBoy(){
+        //given
+        PackingBoy packingBoy = new SmallParkingBoy();
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+
+        //when
+        List<String> ticketList = packingBoy.parkCar(carList);
+
+        //then
+        Assertions.assertEquals(2, ticketList.size());
+    }
 }
