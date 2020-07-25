@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test.story1;
 
-import com.oocl.cultivation.story1.Car;
-import com.oocl.cultivation.story1.PackingBoy;
-import com.oocl.cultivation.story1.PackingLot;
-import com.oocl.cultivation.story1.SmallParkingBoy;
+import com.oocl.cultivation.story1.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -222,6 +219,32 @@ class ParkingBoyFacts {
     }
 
     @Test
+    void should_return_true_when_parkingCar_and_find_car_in_parkingLot1_and_car2_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace5_and_smallParkingBoy_and_2car() {
+        //given
+        List<PackingLot> packingLotList = new ArrayList<>();
+        PackingLot packingLot1 = new PackingLot(5);
+        PackingLot packingLot2 = new PackingLot(5);
+        packingLotList.add(packingLot1);
+        packingLotList.add(packingLot2);
+
+        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
+        List<Car> carList = new ArrayList<>();
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        carList.add(car1);
+        carList.add(car2);
+
+        //when
+        smallPackingBoy.parkCar(carList);
+        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
+        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
+        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
+
+        //then
+        Assertions.assertTrue(isFindCar1InParkingLot1 && isFindCar2InParkingLot2);
+    }
+
+    @Test
     void should_return_ticket_when_park_given_car_smallPakingboy() {
         //given
         PackingBoy smallPackingBoy = new SmallParkingBoy();
@@ -408,28 +431,25 @@ class ParkingBoyFacts {
     }
 
     @Test
-    void should_return_true_when_parkingCar_and_find_ca1_in_parkingLot1_and_car2_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace5_and_smallParkingBoy_and_2car() {
+    void should_return_true_when_parkingCar_and_find_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace10ParkedCar1_and_superSmallParkingBoy_and_car() {
         //given
         List<PackingLot> packingLotList = new ArrayList<>();
-        PackingLot packingLot1 = new PackingLot(5);
+        PackingLot packingLot1 = new PackingLot(10);
         PackingLot packingLot2 = new PackingLot(5);
+
+        packingLot1.getPackingCarList().add(new Car("4444"));
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
-        List<Car> carList = new ArrayList<>();
-        Car car1 = new Car("1234");
-        Car car2 = new Car("2345");
-        carList.add(car1);
-        carList.add(car2);
+        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
+        Car car = new Car("1234");
 
         //when
-        smallPackingBoy.parkCar(carList);
-        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
-        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
-        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
+        superSmallPackingBoy.parkCar(car);
+        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
+        boolean isFind = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car);
 
         //then
-        Assertions.assertTrue(isFindCar1InParkingLot1 && isFindCar2InParkingLot2);
+        Assertions.assertTrue(isFind);
     }
 }
