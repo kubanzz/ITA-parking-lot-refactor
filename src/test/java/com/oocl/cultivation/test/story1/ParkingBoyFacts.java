@@ -1,6 +1,7 @@
 package com.oocl.cultivation.test.story1;
 
 import com.oocl.cultivation.story1.*;
+import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ParkingBoyFacts {
+
+    private String CAR_NULL_ERROR_MESSAGE = ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage();
+    private String PARKING_CAR_HAVE_BEEN_PARKED = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
+    private String PARKING_HAVE_NO_SPACE = ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage();
+    private String FETCHING_HAVE_NO_TICKET = ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET.getMessage();
+    private String FETCHING_ERROR_TICKET = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
+
     @Test
     void should_return_ticket_when_park_given_car_pakingboy() {
         //given
@@ -47,7 +55,7 @@ class ParkingBoyFacts {
         packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,packingBoy.getErrorMessage());
     }
 
     @Test
@@ -61,7 +69,7 @@ class ParkingBoyFacts {
         packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,packingBoy.getErrorMessage());
     }
 
     @Test
@@ -74,7 +82,7 @@ class ParkingBoyFacts {
         packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car cannot be null",packingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,packingBoy.getErrorMessage());
     }
 
     @Test
@@ -110,7 +118,7 @@ class ParkingBoyFacts {
         packingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.", packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, packingBoy.getErrorMessage());
     }
 
     @Test
@@ -128,11 +136,11 @@ class ParkingBoyFacts {
         packingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.",packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET,packingBoy.getErrorMessage());
     }
 
     @Test
-    void should_return_null_when_fetch_car_given_2car_pakingboy_ticket_has_benn_used() {
+    void should_return_null_when_fetch_car_given_2car_pakingboy_ticket_has_been_used() {
         //given
         PackingBoy packingBoy = new PackingBoy();
         String ticket = "1234";
@@ -147,7 +155,7 @@ class ParkingBoyFacts {
         packingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET,packingBoy.getErrorMessage());
     }
 
     //TODO fix the unit test name
@@ -193,7 +201,7 @@ class ParkingBoyFacts {
 
 
         //then
-        Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,packingBoy.getErrorMessage());
     }
 
     // story4
@@ -283,7 +291,7 @@ class ParkingBoyFacts {
         smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,smallPackingBoy.getErrorMessage());
     }
 
     @Test
@@ -297,7 +305,7 @@ class ParkingBoyFacts {
         smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car has benn packed",smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,smallPackingBoy.getErrorMessage());
     }
 
     @Test
@@ -310,7 +318,7 @@ class ParkingBoyFacts {
         smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car cannot be null",smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,smallPackingBoy.getErrorMessage());
     }
 
     @Test
@@ -346,7 +354,7 @@ class ParkingBoyFacts {
         smallParkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.", smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, smallParkingBoy.getErrorMessage());
     }
 
     @Test
@@ -364,11 +372,11 @@ class ParkingBoyFacts {
         smallParkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Please provide your parking ticket.",smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET,smallParkingBoy.getErrorMessage());
     }
 
     @Test
-    void should_return_unrecognized_message_when_fetch_car_given_2car_smallParkingBoy_ticket_has_benn_used() {
+    void should_return_unrecognized_message_when_fetch_car_given_2car_smallParkingBoy_ticket_has_been_used() {
         //given
         PackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = "1234";
@@ -383,7 +391,7 @@ class ParkingBoyFacts {
         smallParkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals("Unrecognized parking ticket.",smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET,smallParkingBoy.getErrorMessage());
     }
 
     @Test
@@ -427,7 +435,7 @@ class ParkingBoyFacts {
 
 
         //then
-        Assertions.assertEquals("the car has benn packed",smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,smallPackingBoy.getErrorMessage());
     }
 
 
@@ -494,7 +502,7 @@ class ParkingBoyFacts {
         superSmallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("Not enough position.",superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,superSmallPackingBoy.getErrorMessage());
     }
 
     @Test
@@ -508,7 +516,7 @@ class ParkingBoyFacts {
         superSmallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car has benn packed",superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,superSmallPackingBoy.getErrorMessage());
     }
 
     @Test
@@ -521,7 +529,7 @@ class ParkingBoyFacts {
         superSmallParkingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals("the car cannot be null",superSmallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,superSmallParkingBoy.getErrorMessage());
     }
 
     @Test
@@ -565,7 +573,7 @@ class ParkingBoyFacts {
 
 
         //then
-        Assertions.assertEquals("the car has benn packed",superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,superSmallPackingBoy.getErrorMessage());
     }
 
     @Test

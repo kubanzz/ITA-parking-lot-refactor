@@ -1,5 +1,7 @@
 package com.oocl.cultivation.story1;
 
+import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +22,12 @@ public class SmallParkingBoy extends PackingBoy{
     @Override
     public String parkCar(Car car) {
         if (car == null) {
-            setErrorMessage("the car cannot be null");
+            setErrorMessage(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage());
             return null;
         }
 
         if (isCarHaveBenParked(car)) {
-            setErrorMessage("the car has benn packed");
+            setErrorMessage(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
             return null;
         }
 
@@ -35,20 +37,20 @@ public class SmallParkingBoy extends PackingBoy{
             packingLot.setParkingSpace(packingLot.getParkingSpace() - 1);
             return car.getCardId();
         }
-        setErrorMessage("Not enough position.");
+        setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
         return null;
     }
 
     @Override
     public List<String> parkCar(List<Car> carList) {
         if (carList == null) {
-            setErrorMessage("the car cannot be null");
+            setErrorMessage(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage());
             return null;
         }
 
         for (Car car : carList) {
             if (isCarHaveBenParked(car)) {
-                setErrorMessage("the car has benn packed");
+                setErrorMessage(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
                 return null;
             }
         }
@@ -69,7 +71,7 @@ public class SmallParkingBoy extends PackingBoy{
         }
 
         if (parkedCarNums != carList.size()) {
-            setErrorMessage("Not enough position.");
+            setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
         }
         return ticketList;
     }

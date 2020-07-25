@@ -1,5 +1,7 @@
 package com.oocl.cultivation.story1;
 
+import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+
 import java.util.*;
 
 public class PackingBoy {
@@ -25,12 +27,12 @@ public class PackingBoy {
 
     public String parkCar(Car car) {
         if (car == null) {
-            errorMessage = "the car cannot be null";
+            errorMessage = ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage();
             return null;
         }
 
         if (isCarHaveBenParked(car)) {
-            errorMessage = "the car has benn packed";
+            errorMessage = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
             return null;
         }
 
@@ -46,19 +48,19 @@ public class PackingBoy {
             }
         }
 
-        errorMessage = "Not enough position.";
+        errorMessage = ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage();
         return null;
     }
 
     public List<String> parkCar(List<Car> carList) {
         if (carList == null) {
-            errorMessage = "the car cannot be null";
+            errorMessage = ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage();
             return null;
         }
 
         for (Car car : carList) {
             if (isCarHaveBenParked(car)) {
-                errorMessage = "the car has benn packed";
+                errorMessage = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
                 return null;
             }
         }
@@ -82,7 +84,7 @@ public class PackingBoy {
         }
 
         if (parkedCarNums != carList.size()) {
-            errorMessage = "Not enough position.";
+            errorMessage = ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage();
         }
         return ticketList;
     }
@@ -101,7 +103,7 @@ public class PackingBoy {
 
     public Car fetchCar(String ticket) {
         if (ticket == null) {
-            errorMessage = "Please provide your parking ticket.";
+            errorMessage = ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET.getMessage();
             return null;
         }
 
@@ -117,7 +119,7 @@ public class PackingBoy {
             }
         }
 
-        errorMessage = "Unrecognized parking ticket.";
+        errorMessage = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
         return null;
     }
 
