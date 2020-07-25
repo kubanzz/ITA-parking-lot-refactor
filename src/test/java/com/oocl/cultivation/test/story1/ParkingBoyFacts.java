@@ -21,7 +21,7 @@ class ParkingBoyFacts {
         String ticket = packingBoy.parkCar(car);
 
         //then
-        Assertions.assertNotEquals("the parking is full",ticket);
+        Assertions.assertEquals(car.getCardId(),ticket);
     }
 
     @Test
@@ -199,8 +199,9 @@ class ParkingBoyFacts {
         Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
     }
 
+    // story4
     @Test
-    void should_return_true_when_parkingCar_and_find_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace10_and_parkingBoy_and_car() {
+    void should_return_true_when_parkingCar_and_find_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace10_and_smallParkingBoy_and_car() {
         //given
         List<PackingLot> packingLotList = new ArrayList<>();
         PackingLot packingLot1 = new PackingLot(5);
@@ -219,4 +220,19 @@ class ParkingBoyFacts {
         //then
         Assertions.assertTrue(isFind);
     }
+
+    @Test
+    void should_return_ticket_when_park_given_car_smallPakingboy() {
+        //given
+        PackingBoy packingBoy = new SmallParkingBoy();
+        Car car = new Car("1234");
+
+        //when
+        String ticket = packingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals(car.getCardId(),ticket);
+    }
+
+
 }

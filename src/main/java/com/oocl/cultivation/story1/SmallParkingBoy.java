@@ -4,6 +4,10 @@ import java.util.List;
 
 public class SmallParkingBoy extends PackingBoy{
 
+    public SmallParkingBoy(){
+        super();
+    }
+
     public SmallParkingBoy(List<PackingLot> packingLotList) {
         super(packingLotList);
     }
