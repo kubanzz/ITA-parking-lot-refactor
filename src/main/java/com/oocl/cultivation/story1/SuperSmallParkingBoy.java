@@ -9,6 +9,10 @@ public class SuperSmallParkingBoy extends PackingBoy {
         super(packingLotList);
     }
 
+    public SuperSmallParkingBoy() {
+        super();
+    }
+
     @Override
     public String parkCar(Car car) {
         PackingLot packingLot = findMaxSiteRateParkingLot();

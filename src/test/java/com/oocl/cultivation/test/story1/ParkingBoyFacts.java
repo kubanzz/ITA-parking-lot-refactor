@@ -430,6 +430,8 @@ class ParkingBoyFacts {
         Assertions.assertEquals("the car has benn packed",packingBoy.getErrorMessage());
     }
 
+
+    // story5
     @Test
     void should_return_true_when_parkingCar_and_find_in_parkingLot2_given_parkingLot1WithSpace5_and_parkingLot2WithSpace10ParkedCar1_and_superSmallParkingBoy_and_car() {
         //given
@@ -451,5 +453,18 @@ class ParkingBoyFacts {
 
         //then
         Assertions.assertTrue(isFind);
+    }
+
+    @Test
+    void should_return_ticket_when_park_given_car_superSmallParkingBoy() {
+        //given
+        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
+        Car car = new Car("1234");
+
+        //when
+        String ticket = superSmallPackingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals(car.getCardId(),ticket);
     }
 }
