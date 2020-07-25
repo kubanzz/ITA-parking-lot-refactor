@@ -325,4 +325,22 @@ class ParkingBoyFacts {
         //then
         Assertions.assertEquals("Unrecognized parking ticket.", smallParkingBoy.getErrorMessage());
     }
+
+    @Test
+    void should_return_wrong_message_when_fetch_car_given_2car_smallParkingBoy_without_ticket() {
+        //given
+        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        String ticket = null;
+
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car("1234"));
+        carList.add(new Car("2345"));
+        smallParkingBoy.parkCar(carList);
+
+        //when
+        smallParkingBoy.fetchCar(ticket);
+
+        //then
+        Assertions.assertEquals("Please provide your parking ticket.",smallParkingBoy.getErrorMessage());
+    }
 }
