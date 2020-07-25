@@ -24,9 +24,10 @@ public class SuperSmallParkingBoy extends PackingBoy {
             packingLot.getPackingCarList().add(car);
             return car.getCardId();
         }
+        setErrorMessage("Not enough position.");
         return null;
     }
-    
+
     private PackingLot findMaxSiteRateParkingLot() {
         List<PackingLot> packingLotList = getPackingLotList();
         PackingLot maxSiteRateParkingLot = null;
