@@ -32,6 +32,7 @@ public class SmallParkingBoy extends PackingBoy{
         PackingLot packingLot = findSurplusMaxSpaceParkingLot();
         if (packingLot != null && packingLot.getParkingSpace() > 0) {
             packingLot.getPackingCarList().add(car);
+            packingLot.setParkingSpace(packingLot.getParkingSpace() - 1);
             return car.getCardId();
         }
         setErrorMessage("Not enough position.");
