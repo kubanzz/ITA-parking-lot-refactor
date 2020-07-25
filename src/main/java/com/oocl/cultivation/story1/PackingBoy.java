@@ -58,28 +58,13 @@ public class PackingBoy {
             return null;
         }
 
-        for (Car car : carList) {
-            if (isCarHaveBenParked(car)) {
-                errorMessage = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
-                return null;
-            }
-        }
-
         List<String> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {
-            for (PackingLot packingLot : packingLots) {
-                int parkingSpace = packingLot.getParkingSpace();
-                List<Car> packingCarList = packingLot.getPackingCarList();
-
-                if (parkingSpace > 0) {
-                    packingCarList.add(car);
-                    parkedCarNums ++;
-
-                    packingLot.setParkingSpace(-- parkingSpace);
-                    ticketList.add(car.getCardId());
-                    break;
-                }
+            String ticket = parkCar(car);
+            if (ticket != null) {
+                parkedCarNums ++;
+                ticketList.add(ticket);
             }
         }
 

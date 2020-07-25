@@ -48,25 +48,13 @@ public class SmallParkingBoy extends PackingBoy{
             return null;
         }
 
-        for (Car car : carList) {
-            if (isCarHaveBenParked(car)) {
-                setErrorMessage(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
-                return null;
-            }
-        }
-
         List<String> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {
-            PackingLot packingLot = findSurplusMaxSpaceParkingLot();
-            if (packingLot != null && packingLot.getParkingSpace() > 0) {
-                int parkingSpace = packingLot.getParkingSpace();
-                List<Car> packingCarList = packingLot.getPackingCarList();
-
-                packingCarList.add(car);
-                packingLot.setParkingSpace(-- parkingSpace);
+            String ticket = parkCar(car);
+            if (ticket != null) {
                 parkedCarNums ++;
-                ticketList.add(car.getCardId());
+                ticketList.add(ticket);
             }
         }
 
