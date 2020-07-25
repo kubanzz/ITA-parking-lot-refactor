@@ -497,4 +497,30 @@ class ParkingBoyFacts {
         Assertions.assertEquals("Not enough position.",superSmallPackingBoy.getErrorMessage());
     }
 
+    @Test
+    void should_return_wrong_message_when_park_car_given_parked_car_and_superSmallParkingBoy(){
+        //given
+        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
+        Car car = new Car("1234");
+
+        //when
+        superSmallPackingBoy.parkCar(car);
+        superSmallPackingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the car has benn packed",superSmallPackingBoy.getErrorMessage());
+    }
+
+    @Test
+    void should_return_wrong_message_when_park_car_given_null_car_and_superSmallParkingBoy(){
+        //given
+        PackingBoy superSmallParkingBoy = new SuperSmallParkingBoy();
+        Car car = null;
+
+        //when
+        superSmallParkingBoy.parkCar(car);
+
+        //then
+        Assertions.assertEquals("the car cannot be null",superSmallParkingBoy.getErrorMessage());
+    }
 }
