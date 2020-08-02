@@ -11,6 +11,7 @@ import com.oocl.cultivation.story1.exceptions.TicketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractPackingBoy {
     private List<PackingLot> packingLots = new ArrayList<>();
@@ -71,16 +72,16 @@ public abstract class AbstractPackingBoy {
         }
 
         List<Ticket> ticketList = new ArrayList<>();
-        int parkedCarNums = 0;
-        for (Car car : carList) {
-            Ticket ticket = parkCar(car);
-            if (ticket != null) {
-                parkedCarNums ++;
-                ticketList.add(ticket);
-            }
-        }
+        AtomicInteger parkedCarNums = new AtomicInteger();
+        carList.stream()
+                .map(car -> parkCar(car))
+                .filter(Objects::nonNull)
+                .forEach(ticket -> {
+                    parkedCarNums.getAndIncrement();
+                    ticketList.add(ticket);
+                });
 
-        if (parkedCarNums != carList.size()) {
+        if (parkedCarNums.get() != carList.size()) {
             throw new NotEnoughPositionException(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE);
         }
         return ticketList;
