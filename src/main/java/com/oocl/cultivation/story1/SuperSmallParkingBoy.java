@@ -1,8 +1,5 @@
 package com.oocl.cultivation.story1;
 
-import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SuperSmallParkingBoy extends AbstractPackingBoy {
@@ -19,7 +16,7 @@ public class SuperSmallParkingBoy extends AbstractPackingBoy {
     public SuperSmallParkingBoy() {
         super();
     }
-    
+
     @Override
     public PackingLot findRightParkingLot() {
         List<PackingLot> packingLotList = getPackingLots();

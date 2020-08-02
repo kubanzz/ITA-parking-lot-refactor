@@ -1,6 +1,8 @@
 package com.oocl.cultivation.test.story1;
 
 import com.oocl.cultivation.story1.*;
+import com.oocl.cultivation.story1.entity.Car;
+import com.oocl.cultivation.story1.entity.Ticket;
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
 import com.oocl.cultivation.story1.exceptions.*;
 import org.junit.jupiter.api.Assertions;
@@ -24,10 +26,10 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        String ticket = packingBoy.parkCar(car);
+        Ticket ticket = packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertEquals(Ticket.generateTicket(car), ticket);
     }
 
     @Test
@@ -39,7 +41,7 @@ class ParkingBoyFacts {
         carList.add(new Car("2345"));
 
         //when
-        List<String> ticketList = packingBoy.parkCar(carList);
+        List<Ticket> ticketList = packingBoy.parkCar(carList);
 
         //then
         Assertions.assertEquals(2, ticketList.size());
@@ -92,30 +94,37 @@ class ParkingBoyFacts {
     void should_return_current_ticket_when_fetch_car_given_2car_parkingboy_ticket() {
         //given
         PackingBoy packingBoy = new PackingBoy();
-        String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        carList.add(car1);
+        carList.add(car2);
         packingBoy.parkCar(carList);
+
+        Ticket ticket = Ticket.generateTicket(car1);
 
         //when
         Car fetchCar = packingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals(ticket, fetchCar.getCardId());
+        Assertions.assertEquals(car1.getCardId(), fetchCar.getCardId());
     }
 
     @Test
     void should_return_null_when_fetch_car_given_2car_parkingboy_wrong_ticket() {
         //given
         PackingBoy packingBoy = new PackingBoy();
-        String ticket = "1235";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        carList.add(car1);
+        carList.add(car2);
         packingBoy.parkCar(carList);
+
+        Car carNoPacked = new Car("1324");
+        Ticket ticket = Ticket.generateTicket(carNoPacked);
 
         //when
         BaseException exception = Assertions.assertThrows(TicketException.class, () -> packingBoy.fetchCar(ticket));
@@ -128,7 +137,7 @@ class ParkingBoyFacts {
     void should_return_wrong_message_when_fetch_car_given_2car_parkingboy_without_ticket() {
         //given
         PackingBoy packingBoy = new PackingBoy();
-        String ticket = null;
+        Ticket ticket = null;
 
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("1234"));
@@ -146,12 +155,15 @@ class ParkingBoyFacts {
     void should_return_null_when_fetch_car_given_2car_pakingboy_ticket_has_been_used() {
         //given
         PackingBoy packingBoy = new PackingBoy();
-        String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        carList.add(car1);
+        carList.add(car2);
         packingBoy.parkCar(carList);
+
+        Ticket ticket = Ticket.generateTicket(car1);
 
         //when
         packingBoy.fetchCar(ticket);
@@ -176,10 +188,10 @@ class ParkingBoyFacts {
 
         //when
         packingBoy.parkCar(new Car("2345"));
-        String ticket = packingBoy.parkCar(car);
+        Ticket ticket = packingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertEquals(Ticket.generateTicket(car), ticket);
     }
 
     // 检验进来的时候第一个停车场满了，所以car停在第二个停车场，这时候第一个停车场走了一辆车，客户拿着已经停过的车再来停
@@ -197,7 +209,7 @@ class ParkingBoyFacts {
         Car car2 = new Car("4567");
 
         //when
-        String ticket1 = packingBoy.parkCar(car1);
+        Ticket ticket1 = packingBoy.parkCar(car1);
         packingBoy.parkCar(car2);
         packingBoy.fetchCar(ticket1);
         BaseException exception =
@@ -262,10 +274,10 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        String ticket = smallPackingBoy.parkCar(car);
+        Ticket ticket = smallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertEquals(Ticket.generateTicket(car),ticket);
     }
 
     @Test
@@ -277,7 +289,7 @@ class ParkingBoyFacts {
         carList.add(new Car("2345"));
 
         //when
-        List<String> ticketList = packingBoy.parkCar(carList);
+        List<Ticket> ticketList = packingBoy.parkCar(carList);
 
         //then
         Assertions.assertEquals(2, ticketList.size());
@@ -329,30 +341,37 @@ class ParkingBoyFacts {
     void should_return_current_ticket_when_fetch_car_given_2car_smallParkingBoy_ticket() {
         //given
         AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
-        String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        carList.add(car1);
+        carList.add(car2);
         smallParkingBoy.parkCar(carList);
+
+        Ticket ticket = Ticket.generateTicket(car1);
 
         //when
         Car fetchCar = smallParkingBoy.fetchCar(ticket);
 
         //then
-        Assertions.assertEquals(ticket, fetchCar.getCardId());
+        Assertions.assertEquals(car1, fetchCar);
     }
 
     @Test
     void should_return_null_when_fetch_car_given_2car_smallParkingBoy_wrong_ticket() {
         //given
         AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
-        String ticket = "1235";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        Car carNoPacked = new Car("1235");
+        carList.add(car1);
+        carList.add(car2);
         smallParkingBoy.parkCar(carList);
+
+        Ticket ticket = Ticket.generateTicket(carNoPacked);
 
         //when
         BaseException exception = Assertions.assertThrows(TicketException.class,() -> smallParkingBoy.fetchCar(ticket));
@@ -365,7 +384,7 @@ class ParkingBoyFacts {
     void should_return_wrong_message_when_fetch_car_given_2car_smallParkingBoy_without_ticket() {
         //given
         AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
-        String ticket = null;
+        Ticket ticket = null;
 
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("1234"));
@@ -383,12 +402,16 @@ class ParkingBoyFacts {
     void should_return_unrecognized_message_when_fetch_car_given_2car_smallParkingBoy_ticket_has_been_used() {
         //given
         AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
-        String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car("1234"));
-        carList.add(new Car("2345"));
+        Car car1 = new Car("1234");
+        Car car2 = new Car("2345");
+        Car carNoPacked = new Car("1235");
+        carList.add(car1);
+        carList.add(car2);
         smallParkingBoy.parkCar(carList);
+
+        Ticket ticket = Ticket.generateTicket(car1);
 
         //when
         smallParkingBoy.fetchCar(ticket);
@@ -413,10 +436,10 @@ class ParkingBoyFacts {
 
         //when
         smallParkingBoy.parkCar(new Car("2345"));
-        String ticket = smallParkingBoy.parkCar(car);
+        Ticket ticket = smallParkingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertNotNull(ticket);
     }
 
     @Test
@@ -433,7 +456,7 @@ class ParkingBoyFacts {
         Car car2 = new Car("4567");
 
         //when
-        String ticket1 = smallPackingBoy.parkCar(car1);
+        Ticket ticket1 = smallPackingBoy.parkCar(car1);
         smallPackingBoy.parkCar(car2);
         smallPackingBoy.fetchCar(ticket1);
         BaseException exception =
@@ -476,10 +499,10 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        String ticket = superSmallPackingBoy.parkCar(car);
+        Ticket ticket = superSmallPackingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertNotNull(ticket);
     }
 
     @Test
@@ -491,7 +514,7 @@ class ParkingBoyFacts {
         carList.add(new Car("2345"));
 
         //when
-        List<String> ticketList = superSmallPackingBoy.parkCar(carList);
+        List<Ticket> ticketList = superSmallPackingBoy.parkCar(carList);
 
         //then
         Assertions.assertEquals(2, ticketList.size());
@@ -553,10 +576,10 @@ class ParkingBoyFacts {
 
         //when
         superSmallParkingBoy.parkCar(new Car("2345"));
-        String ticket = superSmallParkingBoy.parkCar(car);
+        Ticket ticket = superSmallParkingBoy.parkCar(car);
 
         //then
-        Assertions.assertEquals(car.getCardId(),ticket);
+        Assertions.assertNotNull(ticket);
     }
 
     @Test
@@ -573,7 +596,7 @@ class ParkingBoyFacts {
         Car car2 = new Car("4567");
 
         //when
-        String ticket1 = superSmallPackingBoy.parkCar(car1);
+        Ticket ticket1 = superSmallPackingBoy.parkCar(car1);
         superSmallPackingBoy.parkCar(car2);
         superSmallPackingBoy.fetchCar(ticket1);
         BaseException exception = Assertions.assertThrows(CarHaveBeenParkedException.class,() -> superSmallPackingBoy.parkCar(car2));

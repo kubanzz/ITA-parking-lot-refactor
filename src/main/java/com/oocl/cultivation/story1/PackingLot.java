@@ -1,7 +1,7 @@
 package com.oocl.cultivation.story1;
 
-import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
-import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.story1.entity.Car;
+import com.oocl.cultivation.story1.entity.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class PackingLot {
         return parkingSpace;
     }
 
-    public Car fetchCar(String ticket){
+    public Car fetchCar(Ticket ticket){
         for (Car carParked : packingCarList) {
             if (Ticket.generateTicket(carParked).equals(ticket)) {
                 packingCarList.remove(carParked);
@@ -39,7 +39,7 @@ public class PackingLot {
         return null;
     }
 
-    public String parkCar(Car car){
+    public Ticket parkCar(Car car){
         if (this.getRemainingSpace() > 0) {
             this.packingCarList.add(car);
             return Ticket.generateTicket(car);

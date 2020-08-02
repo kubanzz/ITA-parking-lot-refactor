@@ -19,8 +19,4 @@ public enum  ParkingFetchingEnums {
         return message;
     }
 
-    @Override
-    public String toString() {
-        return message;
-    }
 }

@@ -1,5 +1,7 @@
 package com.oocl.cultivation.story1;
 
+import com.oocl.cultivation.story1.entity.Car;
+import com.oocl.cultivation.story1.entity.Ticket;
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
 import com.oocl.cultivation.story1.exceptions.CarHaveBeenParkedException;
 import com.oocl.cultivation.story1.exceptions.CarIllegalException;
@@ -29,7 +31,7 @@ public abstract class AbstractPackingBoy {
         return packingLots;
     }
 
-    public Car fetchCar(String ticket) {
+    public Car fetchCar(Ticket ticket) {
         if (ticket == null) {
             throw new TicketException(ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET);
         }
@@ -46,7 +48,7 @@ public abstract class AbstractPackingBoy {
                 .anyMatch(packingLot -> packingLot.isCarHaveBeenParked(car));
     }
 
-    public String parkCar(Car car){
+    public Ticket parkCar(Car car){
         if (car == null) {
             throw new CarIllegalException(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE);
         }
@@ -63,15 +65,15 @@ public abstract class AbstractPackingBoy {
         return packingLot.parkCar(car);
     }
 
-    public List<String> parkCar(List<Car> carList){
+    public List<Ticket> parkCar(List<Car> carList){
         if (carList == null) {
             throw new CarIllegalException(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE);
         }
 
-        List<String> ticketList = new ArrayList<>();
+        List<Ticket> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {
-            String ticket = parkCar(car);
+            Ticket ticket = parkCar(car);
             if (ticket != null) {
                 parkedCarNums ++;
                 ticketList.add(ticket);

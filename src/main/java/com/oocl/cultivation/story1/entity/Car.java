@@ -1,4 +1,4 @@
-package com.oocl.cultivation.story1;
+package com.oocl.cultivation.story1.entity;
 
 public class Car {
     private String cardId;
@@ -10,4 +10,5 @@ public class Car {
     public String getCardId() {
         return cardId;
     }
+
 }
