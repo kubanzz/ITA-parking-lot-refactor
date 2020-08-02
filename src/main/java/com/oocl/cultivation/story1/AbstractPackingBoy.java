@@ -1,6 +1,9 @@
 package com.oocl.cultivation.story1;
 
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+import com.oocl.cultivation.story1.exceptions.CarHaveBeenParkedException;
+import com.oocl.cultivation.story1.exceptions.CarIllegalException;
+import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +58,48 @@ public abstract class AbstractPackingBoy {
                 .anyMatch(packingLot -> packingLot.isCarHaveBeenParked(car));
     }
 
-    public abstract String parkCar(Car car);
-    public abstract List<String> parkCar(List<Car> carList);
+    public String parkCar(Car car){
+        if (car == null) {
+            throw new CarIllegalException(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE);
+        }
 
+        if (isCarHaveBenParked(car)) {
+            throw new CarHaveBeenParkedException(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED);
+        }
+
+        if (isParkingLotsFull()) {
+            throw new NotEnoughPositionException(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE);
+        }
+
+        PackingLot packingLot = findRightParkingLot();
+        return packingLot.parkCar(car);
+    }
+
+    public List<String> parkCar(List<Car> carList){
+        if (carList == null) {
+            throw new CarIllegalException(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE);
+        }
+
+        List<String> ticketList = new ArrayList<>();
+        int parkedCarNums = 0;
+        for (Car car : carList) {
+            String ticket = parkCar(car);
+            if (ticket != null) {
+                parkedCarNums ++;
+                ticketList.add(ticket);
+            }
+        }
+
+        if (parkedCarNums != carList.size()) {
+            throw new NotEnoughPositionException(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE);
+        }
+        return ticketList;
+    }
+
+    public abstract PackingLot findRightParkingLot();
+
+    protected boolean isParkingLotsFull() {
+        return packingLots.stream()
+                .allMatch(PackingLot::isParkingLogFull);
+    }
 }

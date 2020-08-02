@@ -2,6 +2,10 @@ package com.oocl.cultivation.test.story1;
 
 import com.oocl.cultivation.story1.*;
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+import com.oocl.cultivation.story1.exceptions.BaseException;
+import com.oocl.cultivation.story1.exceptions.CarHaveBeenParkedException;
+import com.oocl.cultivation.story1.exceptions.CarIllegalException;
+import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -52,10 +56,11 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        packingBoy.parkCar(car);
+        BaseException exception =
+                Assertions.assertThrows(NotEnoughPositionException.class,() -> packingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,exception.getMessage());
     }
 
     @Test
@@ -66,10 +71,10 @@ class ParkingBoyFacts {
 
         //when
         packingBoy.parkCar(car);
-        packingBoy.parkCar(car);
+        BaseException exception = Assertions.assertThrows(CarHaveBeenParkedException.class, () -> packingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,exception.getMessage());
     }
 
     @Test
@@ -79,10 +84,11 @@ class ParkingBoyFacts {
         Car car = null;
 
         //when
-        packingBoy.parkCar(car);
+        BaseException exception =
+                Assertions.assertThrows(CarIllegalException.class, () -> packingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,packingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,exception.getMessage());
     }
 
     @Test
@@ -197,11 +203,11 @@ class ParkingBoyFacts {
         String ticket1 = packingBoy.parkCar(car1);
         packingBoy.parkCar(car2);
         packingBoy.fetchCar(ticket1);
-        packingBoy.parkCar(car2);
-
+        BaseException exception =
+                Assertions.assertThrows(CarHaveBeenParkedException.class,() -> packingBoy.parkCar(car2));
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,packingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,exception.getMessage());
     }
 
     // story4
@@ -288,10 +294,11 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        smallPackingBoy.parkCar(car);
+        BaseException exception =
+                Assertions.assertThrows(NotEnoughPositionException.class, () -> smallPackingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,exception.getMessage());
     }
 
     @Test
@@ -302,10 +309,10 @@ class ParkingBoyFacts {
 
         //when
         smallPackingBoy.parkCar(car);
-        smallPackingBoy.parkCar(car);
+        BaseException exception = Assertions.assertThrows(CarHaveBeenParkedException.class, () -> smallPackingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,exception.getMessage());
     }
 
     @Test
@@ -315,10 +322,10 @@ class ParkingBoyFacts {
         Car car = null;
 
         //when
-        smallPackingBoy.parkCar(car);
+        BaseException exception = Assertions.assertThrows(CarIllegalException.class,() -> smallPackingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,exception.getMessage());
     }
 
     @Test
@@ -431,11 +438,12 @@ class ParkingBoyFacts {
         String ticket1 = smallPackingBoy.parkCar(car1);
         smallPackingBoy.parkCar(car2);
         smallPackingBoy.fetchCar(ticket1);
-        smallPackingBoy.parkCar(car2);
+        BaseException exception =
+                Assertions.assertThrows(CarHaveBeenParkedException.class, () -> smallPackingBoy.parkCar(car2));
 
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,smallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED, exception.getMessage());
     }
 
 
@@ -499,10 +507,11 @@ class ParkingBoyFacts {
         Car car = new Car("1234");
 
         //when
-        superSmallPackingBoy.parkCar(car);
+        BaseException exception =
+                Assertions.assertThrows(NotEnoughPositionException.class, () -> superSmallPackingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_HAVE_NO_SPACE,exception.getMessage());
     }
 
     @Test
@@ -513,10 +522,10 @@ class ParkingBoyFacts {
 
         //when
         superSmallPackingBoy.parkCar(car);
-        superSmallPackingBoy.parkCar(car);
+        BaseException exception = Assertions.assertThrows(CarHaveBeenParkedException.class, () -> superSmallPackingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,exception.getMessage());
     }
 
     @Test
@@ -526,10 +535,10 @@ class ParkingBoyFacts {
         Car car = null;
 
         //when
-        superSmallParkingBoy.parkCar(car);
+        BaseException exception = Assertions.assertThrows(CarIllegalException.class,() -> superSmallParkingBoy.parkCar(car));
 
         //then
-        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,superSmallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(CAR_NULL_ERROR_MESSAGE,exception.getMessage());
     }
 
     @Test
@@ -569,11 +578,11 @@ class ParkingBoyFacts {
         String ticket1 = superSmallPackingBoy.parkCar(car1);
         superSmallPackingBoy.parkCar(car2);
         superSmallPackingBoy.fetchCar(ticket1);
-        superSmallPackingBoy.parkCar(car2);
+        BaseException exception = Assertions.assertThrows(CarHaveBeenParkedException.class,() -> superSmallPackingBoy.parkCar(car2));
 
 
         //then
-        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,superSmallPackingBoy.getErrorMessage());
+        Assertions.assertEquals(PARKING_CAR_HAVE_BEEN_PARKED,exception.getMessage());
     }
 
     @Test

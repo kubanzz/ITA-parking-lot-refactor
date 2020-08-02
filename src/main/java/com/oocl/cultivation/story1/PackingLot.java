@@ -1,6 +1,7 @@
 package com.oocl.cultivation.story1;
 
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,4 +52,7 @@ public class PackingLot {
                 .anyMatch(carParked -> carParked.getCardId().equals(car.getCardId()));
     }
 
+    public boolean isParkingLogFull(){
+        return packingCarList.size() >= parkingSpace;
+    }
 }

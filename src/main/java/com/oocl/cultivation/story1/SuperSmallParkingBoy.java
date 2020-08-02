@@ -19,56 +19,9 @@ public class SuperSmallParkingBoy extends AbstractPackingBoy {
     public SuperSmallParkingBoy() {
         super();
     }
-
+    
     @Override
-    public String parkCar(Car car) {
-        if (car == null) {
-            setErrorMessage(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage());
-            return null;
-        }
-
-        if (isCarHaveBenParked(car)) {
-            setErrorMessage(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
-            return null;
-        }
-
-        PackingLot packingLot = findMaxSiteRateParkingLot();
-        if (packingLot != null && packingLot.getParkingSpace() > 0) {
-            return packingLot.parkCar(car);
-        }
-        setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
-        return null;
-    }
-
-    @Override
-    public List<String> parkCar(List<Car> carList) {
-        if (carList == null) {
-            setErrorMessage(ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage());
-            return null;
-        }
-
-        if (carList.stream().anyMatch(this::isCarHaveBenParked)){
-            throw new RuntimeException(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
-        }
-
-        //TODO stream
-        List<String> ticketList = new ArrayList<>();
-        int parkedCarNums = 0;
-        for (Car car : carList) {
-            String ticket = parkCar(car);
-            if (ticket != null) {
-                parkedCarNums ++;
-                ticketList.add(ticket);
-            }
-        }
-
-        if (parkedCarNums != carList.size()) {
-            setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
-        }
-        return ticketList;
-    }
-
-    private PackingLot findMaxSiteRateParkingLot() {
+    public PackingLot findRightParkingLot() {
         List<PackingLot> packingLotList = getPackingLots();
         PackingLot maxSiteRateParkingLot = null;
         double maxSiteRate = 0;
