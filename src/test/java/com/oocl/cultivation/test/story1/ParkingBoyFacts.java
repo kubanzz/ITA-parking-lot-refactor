@@ -219,7 +219,7 @@ class ParkingBoyFacts {
 
         //when
         smallPackingBoy.parkCar(car);
-        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
+        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLots();
         boolean isFind = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car);
 
         //then
@@ -244,7 +244,7 @@ class ParkingBoyFacts {
 
         //when
         smallPackingBoy.parkCar(carList);
-        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
+        List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLots();
         boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).isCarHaveBeenParked(car1);
         boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car2);
 
@@ -456,7 +456,7 @@ class ParkingBoyFacts {
 
         //when
         superSmallPackingBoy.parkCar(car);
-        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
+        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLots();
         boolean isFind = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car);
 
         //then
@@ -594,7 +594,7 @@ class ParkingBoyFacts {
 
         //when
         superSmallPackingBoy.parkCar(carList);
-        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
+        List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLots();
         boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).isCarHaveBeenParked(car1);
         boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car2);
 

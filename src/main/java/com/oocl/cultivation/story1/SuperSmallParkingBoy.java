@@ -47,13 +47,11 @@ public class SuperSmallParkingBoy extends AbstractPackingBoy {
             return null;
         }
 
-        for (Car car : carList) {
-            if (isCarHaveBenParked(car)) {
-                setErrorMessage(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
-                return null;
-            }
+        if (carList.stream().anyMatch(this::isCarHaveBenParked)){
+            throw new RuntimeException(ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage());
         }
 
+        //TODO stream
         List<String> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {
@@ -71,10 +69,11 @@ public class SuperSmallParkingBoy extends AbstractPackingBoy {
     }
 
     private PackingLot findMaxSiteRateParkingLot() {
-        List<PackingLot> packingLotList = getPackingLotList();
+        List<PackingLot> packingLotList = getPackingLots();
         PackingLot maxSiteRateParkingLot = null;
         double maxSiteRate = 0;
 
+        // TODO stream
         for (PackingLot packingLot : packingLotList) {
             if (maxSiteRateParkingLot == null || maxSiteRate < calculateSiteRate(packingLot)) {
                 maxSiteRateParkingLot = packingLot;

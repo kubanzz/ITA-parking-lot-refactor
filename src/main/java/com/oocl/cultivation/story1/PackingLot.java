@@ -47,12 +47,8 @@ public class PackingLot {
     }
 
     public boolean isCarHaveBeenParked(Car car){
-        for (Car carParked : packingCarList) {
-            if (carParked.getCardId().equals(car.getCardId())) {
-                return true;
-            }
-        }
-        return false;
+        return packingCarList.stream()
+                .anyMatch(carParked -> carParked.getCardId().equals(car.getCardId()));
     }
 
 }

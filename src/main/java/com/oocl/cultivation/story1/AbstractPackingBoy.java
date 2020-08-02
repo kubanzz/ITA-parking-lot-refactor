@@ -21,8 +21,8 @@ public abstract class AbstractPackingBoy {
         this.packingLots = new ArrayList<>(parkingLotList);
     }
 
-    public List<PackingLot> getPackingLotList() {
-        return this.packingLots;
+    public List<PackingLot> getPackingLots() {
+        return packingLots;
     }
 
     public String getErrorMessage() {
@@ -39,25 +39,20 @@ public abstract class AbstractPackingBoy {
             return null;
         }
 
+        // TODO stream
         for (PackingLot packingLot : packingLots) {
             Car car = packingLot.fetchCar(ticket);
             if (car != null) {
                 return car;
             }
         }
-
         errorMessage = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
         return null;
     }
 
     protected boolean isCarHaveBenParked(Car car){
-        for (PackingLot packingLot : getPackingLotList()) {
-            boolean isCarPacked = packingLot.isCarHaveBeenParked(car);
-            if (isCarPacked){
-                return true;
-            }
-        }
-        return false;
+        return packingLots.stream()
+                .anyMatch(packingLot -> packingLot.isCarHaveBeenParked(car));
     }
 
     public abstract String parkCar(Car car);

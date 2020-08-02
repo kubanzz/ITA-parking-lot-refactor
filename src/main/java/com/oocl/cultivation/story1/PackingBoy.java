@@ -28,7 +28,8 @@ public class PackingBoy extends AbstractPackingBoy{
             return null;
         }
 
-        for (PackingLot packingLot : getPackingLotList()) {
+        //TODO stream
+        for (PackingLot packingLot : getPackingLots()) {
             String ticket = packingLot.parkCar(car);
             if (ticket != null) {
                 return ticket;
@@ -45,6 +46,7 @@ public class PackingBoy extends AbstractPackingBoy{
             return null;
         }
 
+        //TODO stream
         List<String> ticketList = new ArrayList<>();
         int parkedCarNums = 0;
         for (Car car : carList) {

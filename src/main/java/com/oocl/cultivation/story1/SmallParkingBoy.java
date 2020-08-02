@@ -63,7 +63,7 @@ public class SmallParkingBoy extends AbstractPackingBoy{
     }
 
     private PackingLot findSurplusMaxSpaceParkingLot() {
-        List<PackingLot> packingLotList = getPackingLotList();
+        List<PackingLot> packingLotList = getPackingLots();
         PackingLot surplusMaxSpacParkingLot = null;
         for (PackingLot packingLot : packingLotList) {
             if (surplusMaxSpacParkingLot == null || surplusMaxSpacParkingLot.getRemainingSpace() < packingLot.getRemainingSpace()) {
