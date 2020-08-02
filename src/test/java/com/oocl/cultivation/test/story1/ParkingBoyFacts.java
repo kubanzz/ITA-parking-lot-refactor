@@ -10,11 +10,11 @@ import java.util.List;
 
 class ParkingBoyFacts {
 
-    private String CAR_NULL_ERROR_MESSAGE = ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage();
-    private String PARKING_CAR_HAVE_BEEN_PARKED = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
-    private String PARKING_HAVE_NO_SPACE = ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage();
-    private String FETCHING_HAVE_NO_TICKET = ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET.getMessage();
-    private String FETCHING_ERROR_TICKET = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
+    private final String CAR_NULL_ERROR_MESSAGE = ParkingFetchingEnums.CAR_NULL_ERROR_MESSAGE.getMessage();
+    private final String PARKING_CAR_HAVE_BEEN_PARKED = ParkingFetchingEnums.PARKING_CAR_HAVE_BEEN_PARKED.getMessage();
+    private final String PARKING_HAVE_NO_SPACE = ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage();
+    private final String FETCHING_HAVE_NO_TICKET = ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET.getMessage();
+    private final String FETCHING_ERROR_TICKET = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
 
     @Test
     void should_return_ticket_when_park_given_car_pakingboy() {
@@ -214,13 +214,13 @@ class ParkingBoyFacts {
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
         Car car = new Car("1234");
 
         //when
         smallPackingBoy.parkCar(car);
         List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
-        boolean isFind = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car);
+        boolean isFind = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car);
 
         //then
         Assertions.assertTrue(isFind);
@@ -235,7 +235,7 @@ class ParkingBoyFacts {
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
         List<Car> carList = new ArrayList<>();
         Car car1 = new Car("1234");
         Car car2 = new Car("2345");
@@ -245,8 +245,8 @@ class ParkingBoyFacts {
         //when
         smallPackingBoy.parkCar(carList);
         List<PackingLot> packingLotListInPackingBoy = smallPackingBoy.getPackingLotList();
-        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
-        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
+        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).isCarHaveBeenParked(car1);
+        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car2);
 
         //then
         Assertions.assertTrue(isFindCar1InParkingLot1 && isFindCar2InParkingLot2);
@@ -255,7 +255,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_ticket_when_park_given_car_smallPakingboy() {
         //given
-        PackingBoy smallPackingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy();
         Car car = new Car("1234");
 
         //when
@@ -268,7 +268,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_2_ticket_when_park_given_car_smallParkingboy(){
         //given
-        PackingBoy packingBoy = new SmallParkingBoy();
+        AbstractPackingBoy packingBoy = new SmallParkingBoy();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("1234"));
         carList.add(new Car("2345"));
@@ -284,7 +284,7 @@ class ParkingBoyFacts {
     void should_return_full_message_when_park_car_given_car_smallParkingBoy_parkingSpace_0(){
         //given
         PackingLot packingLot = new PackingLot(0);
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLot);
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy(packingLot);
         Car car = new Car("1234");
 
         //when
@@ -297,7 +297,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_park_car_given_parked_car_and_smallParkingBoy(){
         //given
-        PackingBoy smallPackingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy();
         Car car = new Car("1234");
 
         //when
@@ -311,7 +311,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_park_car_given_null_car_and_smallParkingBoy(){
         //given
-        PackingBoy smallPackingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy();
         Car car = null;
 
         //when
@@ -324,7 +324,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_current_ticket_when_fetch_car_given_2car_smallParkingBoy_ticket() {
         //given
-        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
@@ -342,7 +342,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_null_when_fetch_car_given_2car_smallParkingBoy_wrong_ticket() {
         //given
-        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = "1235";
 
         List<Car> carList = new ArrayList<>();
@@ -360,7 +360,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_fetch_car_given_2car_smallParkingBoy_without_ticket() {
         //given
-        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = null;
 
         List<Car> carList = new ArrayList<>();
@@ -378,7 +378,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_unrecognized_message_when_fetch_car_given_2car_smallParkingBoy_ticket_has_been_used() {
         //given
-        PackingBoy smallParkingBoy = new SmallParkingBoy();
+        AbstractPackingBoy smallParkingBoy = new SmallParkingBoy();
         String ticket = "1234";
 
         List<Car> carList = new ArrayList<>();
@@ -403,7 +403,7 @@ class ParkingBoyFacts {
         packingLotList.add(fullPackingLot);
         packingLotList.add(unFullPackingLot);
 
-        PackingBoy smallParkingBoy = new SmallParkingBoy(packingLotList);
+        AbstractPackingBoy smallParkingBoy = new SmallParkingBoy(packingLotList);
         Car car = new Car("1234");
 
         //when
@@ -423,7 +423,7 @@ class ParkingBoyFacts {
         packingLotList.add(fullPackingLot);
         packingLotList.add(unFullPackingLot);
 
-        PackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
+        AbstractPackingBoy smallPackingBoy = new SmallParkingBoy(packingLotList);
         Car car1 = new Car("1234");
         Car car2 = new Car("4567");
 
@@ -447,17 +447,17 @@ class ParkingBoyFacts {
         PackingLot packingLot1 = new PackingLot(10);
         PackingLot packingLot2 = new PackingLot(5);
 
-        packingLot1.getPackingCarList().add(new Car("4444"));
+        packingLot1.parkCar(new Car("4444"));
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
         Car car = new Car("1234");
 
         //when
         superSmallPackingBoy.parkCar(car);
         List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
-        boolean isFind = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car);
+        boolean isFind = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car);
 
         //then
         Assertions.assertTrue(isFind);
@@ -466,7 +466,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_ticket_when_park_given_car_superSmallParkingBoy() {
         //given
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
         Car car = new Car("1234");
 
         //when
@@ -479,7 +479,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_2_ticket_when_park_given_car_superSmallParkingBoy(){
         //given
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
         List<Car> carList = new ArrayList<>();
         carList.add(new Car("1234"));
         carList.add(new Car("2345"));
@@ -495,7 +495,7 @@ class ParkingBoyFacts {
     void should_return_full_message_when_park_car_given_car_superSmallParkingBoy_parkingSpace_0(){
         //given
         PackingLot packingLot = new PackingLot(0);
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLot);
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLot);
         Car car = new Car("1234");
 
         //when
@@ -508,7 +508,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_park_car_given_parked_car_and_superSmallParkingBoy(){
         //given
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy();
         Car car = new Car("1234");
 
         //when
@@ -522,7 +522,7 @@ class ParkingBoyFacts {
     @Test
     void should_return_wrong_message_when_park_car_given_null_car_and_superSmallParkingBoy(){
         //given
-        PackingBoy superSmallParkingBoy = new SuperSmallParkingBoy();
+        AbstractPackingBoy superSmallParkingBoy = new SuperSmallParkingBoy();
         Car car = null;
 
         //when
@@ -541,7 +541,7 @@ class ParkingBoyFacts {
         packingLotList.add(fullPackingLot);
         packingLotList.add(unFullPackingLot);
 
-        PackingBoy superSmallParkingBoy = new SuperSmallParkingBoy(packingLotList);
+        AbstractPackingBoy superSmallParkingBoy = new SuperSmallParkingBoy(packingLotList);
         Car car = new Car("1234");
 
         //when
@@ -561,7 +561,7 @@ class ParkingBoyFacts {
         packingLotList.add(fullPackingLot);
         packingLotList.add(unFullPackingLot);
 
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
         Car car1 = new Car("1234");
         Car car2 = new Car("4567");
 
@@ -585,7 +585,7 @@ class ParkingBoyFacts {
         packingLotList.add(packingLot1);
         packingLotList.add(packingLot2);
 
-        PackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
+        AbstractPackingBoy superSmallPackingBoy = new SuperSmallParkingBoy(packingLotList);
         List<Car> carList = new ArrayList<>();
         Car car1 = new Car("1234");
         Car car2 = new Car("2345");
@@ -595,8 +595,8 @@ class ParkingBoyFacts {
         //when
         superSmallPackingBoy.parkCar(carList);
         List<PackingLot> packingLotListInPackingBoy = superSmallPackingBoy.getPackingLotList();
-        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).getPackingCarList().contains(car1);
-        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).getPackingCarList().contains(car2);
+        boolean isFindCar1InParkingLot1 = packingLotListInPackingBoy.get(0).isCarHaveBeenParked(car1);
+        boolean isFindCar2InParkingLot2 = packingLotListInPackingBoy.get(1).isCarHaveBeenParked(car2);
 
         //then
         Assertions.assertTrue(isFindCar1InParkingLot1 && isFindCar2InParkingLot2);

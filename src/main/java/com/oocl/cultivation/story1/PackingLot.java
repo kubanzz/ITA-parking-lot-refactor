@@ -1,11 +1,13 @@
 package com.oocl.cultivation.story1;
 
+import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PackingLot {
     private int parkingSpace;
-    private List<Car> packingCarList;
+    private final List<Car> packingCarList;
 
     public PackingLot() {
         this.parkingSpace = 10;
@@ -17,15 +19,40 @@ public class PackingLot {
         this.packingCarList = new ArrayList<>();
     }
 
+    public int getRemainingSpace() {
+        return parkingSpace - packingCarList.size();
+    }
+
     int getParkingSpace() {
         return parkingSpace;
     }
 
-    void setParkingSpace(int parkingSpace) {
-        this.parkingSpace = parkingSpace;
+    public Car fetchCar(String ticket){
+        for (Car carParked : packingCarList) {
+            if (Ticket.generateTicket(carParked).equals(ticket)) {
+                packingCarList.remove(carParked);
+                this.parkingSpace ++;
+                return carParked;
+            }
+        }
+        return null;
     }
 
-    public List<Car> getPackingCarList() {
-        return packingCarList;
+    public String parkCar(Car car){
+        if (this.getRemainingSpace() > 0) {
+            this.packingCarList.add(car);
+            return Ticket.generateTicket(car);
+        }
+        return null;
     }
+
+    public boolean isCarHaveBeenParked(Car car){
+        for (Car carParked : packingCarList) {
+            if (carParked.getCardId().equals(car.getCardId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

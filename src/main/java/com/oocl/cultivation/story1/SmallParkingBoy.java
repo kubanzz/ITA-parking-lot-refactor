@@ -5,7 +5,7 @@ import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmallParkingBoy extends PackingBoy{
+public class SmallParkingBoy extends AbstractPackingBoy{
 
     public SmallParkingBoy(){
         super();
@@ -33,9 +33,7 @@ public class SmallParkingBoy extends PackingBoy{
 
         PackingLot packingLot = findSurplusMaxSpaceParkingLot();
         if (packingLot != null && packingLot.getParkingSpace() > 0) {
-            packingLot.getPackingCarList().add(car);
-            packingLot.setParkingSpace(packingLot.getParkingSpace() - 1);
-            return generateTicket(car);
+            return packingLot.parkCar(car);
         }
         setErrorMessage(ParkingFetchingEnums.PARKING_HAVE_NO_SPACE.getMessage());
         return null;
@@ -68,7 +66,7 @@ public class SmallParkingBoy extends PackingBoy{
         List<PackingLot> packingLotList = getPackingLotList();
         PackingLot surplusMaxSpacParkingLot = null;
         for (PackingLot packingLot : packingLotList) {
-            if (surplusMaxSpacParkingLot == null || surplusMaxSpacParkingLot.getParkingSpace() < packingLot.getParkingSpace()) {
+            if (surplusMaxSpacParkingLot == null || surplusMaxSpacParkingLot.getRemainingSpace() < packingLot.getRemainingSpace()) {
                 surplusMaxSpacParkingLot = packingLot;
             }
         }
