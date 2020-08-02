@@ -2,10 +2,7 @@ package com.oocl.cultivation.test.story1;
 
 import com.oocl.cultivation.story1.*;
 import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
-import com.oocl.cultivation.story1.exceptions.BaseException;
-import com.oocl.cultivation.story1.exceptions.CarHaveBeenParkedException;
-import com.oocl.cultivation.story1.exceptions.CarIllegalException;
-import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.story1.exceptions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -121,10 +118,10 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        packingBoy.fetchCar(ticket);
+        BaseException exception = Assertions.assertThrows(TicketException.class, () -> packingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_ERROR_TICKET, packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, exception.getMessage());
     }
 
     @Test
@@ -139,10 +136,10 @@ class ParkingBoyFacts {
         packingBoy.parkCar(carList);
 
         //when
-        packingBoy.fetchCar(ticket);
+        BaseException exception = Assertions.assertThrows(TicketException.class,() -> packingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET,packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET,exception.getMessage());
     }
 
     @Test
@@ -158,10 +155,10 @@ class ParkingBoyFacts {
 
         //when
         packingBoy.fetchCar(ticket);
-        packingBoy.fetchCar(ticket);
+        BaseException exception = Assertions.assertThrows(TicketException.class,() -> packingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_ERROR_TICKET,packingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, exception.getMessage());
     }
 
     //TODO fix the unit test name
@@ -358,10 +355,10 @@ class ParkingBoyFacts {
         smallParkingBoy.parkCar(carList);
 
         //when
-        smallParkingBoy.fetchCar(ticket);
+        BaseException exception = Assertions.assertThrows(TicketException.class,() -> smallParkingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_ERROR_TICKET, smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, exception.getMessage());
     }
 
     @Test
@@ -376,10 +373,10 @@ class ParkingBoyFacts {
         smallParkingBoy.parkCar(carList);
 
         //when
-        smallParkingBoy.fetchCar(ticket);
+        BaseException exception = Assertions.assertThrows(TicketException.class, () -> smallParkingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET,smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_HAVE_NO_TICKET, exception.getMessage());
     }
 
     @Test
@@ -395,10 +392,11 @@ class ParkingBoyFacts {
 
         //when
         smallParkingBoy.fetchCar(ticket);
-        smallParkingBoy.fetchCar(ticket);
+        BaseException exception =
+                Assertions.assertThrows(TicketException.class, () -> smallParkingBoy.fetchCar(ticket));
 
         //then
-        Assertions.assertEquals(FETCHING_ERROR_TICKET,smallParkingBoy.getErrorMessage());
+        Assertions.assertEquals(FETCHING_ERROR_TICKET, exception.getMessage());
     }
 
     @Test

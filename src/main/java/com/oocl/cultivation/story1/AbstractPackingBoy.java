@@ -4,13 +4,14 @@ import com.oocl.cultivation.story1.enums.ParkingFetchingEnums;
 import com.oocl.cultivation.story1.exceptions.CarHaveBeenParkedException;
 import com.oocl.cultivation.story1.exceptions.CarIllegalException;
 import com.oocl.cultivation.story1.exceptions.NotEnoughPositionException;
+import com.oocl.cultivation.story1.exceptions.TicketException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractPackingBoy {
     private List<PackingLot> packingLots = new ArrayList<>();
-    private String errorMessage;
 
     public AbstractPackingBoy() {
         packingLots.add(new PackingLot());
@@ -28,29 +29,16 @@ public abstract class AbstractPackingBoy {
         return packingLots;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
     public Car fetchCar(String ticket) {
         if (ticket == null) {
-            errorMessage = ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET.getMessage();
-            return null;
+            throw new TicketException(ParkingFetchingEnums.FETCHING_HAVE_NO_TICKET);
         }
 
-        // TODO stream
-        for (PackingLot packingLot : packingLots) {
-            Car car = packingLot.fetchCar(ticket);
-            if (car != null) {
-                return car;
-            }
-        }
-        errorMessage = ParkingFetchingEnums.FETCHING_ERROR_TICKET.getMessage();
-        return null;
+        return packingLots.stream()
+                .map(packingLot -> packingLot.fetchCar(ticket))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElseThrow(() -> new TicketException(ParkingFetchingEnums.FETCHING_ERROR_TICKET));
     }
 
     protected boolean isCarHaveBenParked(Car car){
