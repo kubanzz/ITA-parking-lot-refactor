@@ -20,6 +20,12 @@ pipeline {
                 bat 'gradle build'
             }
         }
+        
+        stage('JavacocoPublisher') {
+            steps {
+                javacoco()
+            }
+        }
 
         stage ('OWASP Dependency-Check Vulnerabilities') {
             steps {
