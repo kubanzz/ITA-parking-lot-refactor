@@ -3,6 +3,7 @@
 使用了模板方法设计模式和lambda表达式
 
 
+
 # CLI Version
 
 Please read the story and do your implementation.
